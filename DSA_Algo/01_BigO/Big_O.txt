@@ -1,0 +1,305 @@
+Data Structures: A data structure is a way of organizing and storing things so that we can use them easily.
+
+List, set, tuple, dict
+
+List → keep things in a sequence
+Dictionary → keep things as key → value
+Stack → last toy placed is the first toy taken out
+Queue → first child in line gets served first
+Tree → organize things like folders
+Graph → represent connections between things
+
+Algorithm: An algorithm is a step-by-step way to solve a problem.
+
+🧠 Data Structure: How we organize information.
+
+⚙️ Algorithm: The steps we follow to solve a problem.
+
+🚀 DSA: Organize information smartly + solve problems efficiently.
+
+
+Data Structure	Easy Example
+List	📝 Shopping list
+Stack	📚 Books piled up
+Queue	🧑‍🤝‍🧑 People standing in line
+Tree	📁 Computer folders
+Graph	🗺️ Cities connected by roads
+
+
+employees = ["Rahul", "Amit", "Priya", "Neha"]
+
+Now we can easily:
+
+Add an employee
+Remove an employee
+Find an employee
+Update an employee
+Loop through all employees
+
+Data Structure = A way to organize data for efficient use.
+
+
+numbers = [10, 25, 7, 40, 18]
+
+Problem: Find the largest number in a list.
+1. Assume the first number is largest.
+2. Compare it with the next number.
+3. If the next number is larger, remember it.
+4. Continue until the list ends.
+5. Return the largest number.
+
+
+BIG O: Big O Notation is a way to measure how efficiently your code performs as the input size grows.
+
+Time and Space
+
+def find_duplicate(nums):
+    for i in range(len(nums)):
+        for j in range(i + 1, len(nums)):
+            if nums[i] == nums[j]:
+                return True
+    return False
+
+What happens when n = 10?
+
+What happens when n = 1,000,000?
+
+Input Size (n)
+      ↓
+Operations
+      ↓
+Growth Rate
+      ↓
+Time Complexity 
+      ↓
+Space Complexity
+
+Time Complexity: Time complexity describes how the number of operations grows as input size n grows.
+
+Not: How many seconds does the program take?
+
+for x in nums:
+    print(x)
+
+n = 10      → ~10 operations
+n = 100     → ~100
+n = 1,000   → ~1,000
+n = 1,000,000 → ~1,000,000
+
+O(n)
+
+
+Space complexity: Space complexity in Big O notation measures the maximum amount of temporary memory an algorithm needs to run to completion relative to the size of the input data.
+
+When calculating space complexity, computer scientists distinguish between two types of memory usage:
+Input Space: The memory occupied by the input data itself.
+Auxiliary Space: The extra or temporary memory allocated by the algorithm during its execution 
+(e.g., local variables, new arrays, dynamic allocations).
+
+
+Generally, when technical interviews or 
+performance reviews refer to "space complexity," they are focusing primarily on Auxiliary Space, 
+as you often cannot control the size of the incoming data.
+
+
+Big-O — Upper Bound: Big-O to describe the worst-case complexity.
+
+Big-O tells us an asymptotic upper bound on growth.
+
+Big-Omega — Ω: Ω describes an asymptotic lower bound.
+
+Big-Theta — Θ: Θ gives a tight asymptotic bound.
+
+
+Big-O (O) - Upper BoundDescribes the worst-case growth rate.Means the function grows no faster than this limit.
+Gives a ceiling for the algorithm's time or space.
+
+Big-Omega (Ω) - Lower BoundDescribes the best-case growth rate.Means the function grows at least this fast.
+Gives a floor for the algorithm's time or space.
+
+Big-Theta (Θ) - Tight BoundDescribes the exact growth rate.Means the function grows both at least as fast as Ω and no faster than O.
+Gives a precise, matching upper and lower limit.
+
+
+Complexity Growth Chart
+
+Best
+ ↓
+O(1)
+O(log n)
+O(n)
+O(n log n)
+O(n²)
+O(n³)
+O(2ⁿ)
+O(n!)
+ ↓
+Worst
+
+Complexity	Example
+O(1)	dict lookup average case
+O(log n) Binary Search
+O(n)	Linear Search
+O(n log n)	Merge Sort
+O(n²)	Nested loops
+O(n³)	3 nested loops
+O(2ⁿ)	Subset recursion
+O(n!)	Permutations
+
+# O(1)
+x = nums[0]
+
+value = my_dict["name"]
+
+O(log n)
+
+n = 16
+
+16
+ ↓
+8
+ ↓
+4
+ ↓
+2
+ ↓
+1
+Each iteration eliminates roughly half the search space.
+while left <= right:
+    mid = (left + right) // 2
+
+    if nums[mid] == target:
+        return mid
+
+
+List = a numbered row of houses (contiguous memory)
+Go to house #5" → walk straight there → O(1) for list[i].
+
+Is anyone named Sam on this street?" → knock on every door → O(n) for x in my_list. 
+Insert a new house at the front → everyone else shifts down one → O(n).
+
+Dict / Set = a library with a magic index card (hash table)
+Run "Sam" through a hash function → it says "Shelf 42" → walk straight there → O(1) average for x in my_set / x in my_dict.
+Collision (two titles → same shelf) → rare, but worst case degrades to O(n). Mention it, don't dwell.
+
+Tuple = a sealed list
+Same memory layout as a list → indexing is O(1) too. 
+But it can never change — which is exactly why it's allowed to be a dict key or set member 
+(Python needs a guarantee the hash never changes after it's stored).
+
+
+O(n²)
+
+for i in range(n):
+    for j in range(n):
+        print(i, j)
+
+
+
+for i in range(n):
+    ...
+
+for j in range(n):
+    ...
+
+O(n + n)
+O(2n)
+O(n)
+
+
+O(2n)
+→ O(n)
+
+O(5n)
+→ O(n)
+
+O(100n)
+→ O(n)
+
+
+O(n² + n)
+→ O(n²)
+
+
+for a in nums1:
+    ...
+
+for b in nums2:
+    ...
+
+O(n + m)
+
+
+for a in nums1:
+    for b in nums2:
+        ...
+
+O(n * m)
+
+
+#############################
+i = 1
+
+while i < n:
+    i *= 2 # 2, 4, 8, 16, 32
+
+O(log n)
+
+
+i = 0
+
+while i < n:
+    i += 2 # 2, 4, 6, 8, 10
+
+O(n)
+
+
+for i in range(n):
+    j = i
+
+    while j < n:
+        j *= 2
+
+
+1. What is the input size?
+2. What operation are we counting?
+3. How many times does each loop execute?
+4. Are loops sequential or nested?
+5. Is something hidden inside the loop?
+6. Is the loop shrinking/growing exponentially?
+7. What happens with recursion?
+8. What extra memory grows with input?
+9. Simplify the final expression.
+
+
+
+Python operation	Typical complexity
+list[i]	O(1)
+list.append(x)	O(1) amortized
+list.pop()	O(1)
+list.insert(0, x)	O(n)
+list.pop(0)	O(n)
+x in list	O(n)
+
+dict[key]	O(1) average
+key in dict	O(1) average
+x in set	O(1) average
+deque.append()	O(1)
+deque.popleft()	O(1)
+list.sort()	O(n log n)
+
+nested loop → O(n²)
+recursion → O(2ⁿ)
+
+
+Two Pointer
+    ↓
+Give problem
+    ↓
+Brute force
+    ↓
+Analyze O(n²)
+    ↓
+Find pattern
+    ↓
+Optimize to O(n)

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "decorator-toolkit"
+version = "1.0.0"
+description = "A collection of reusable Python decorators"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+
+authors = [
+    { name = "Yogesh Yadav" }
+]
+
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/example/decorator-toolkit"
+Repository = "https://github.com/example/decorator-toolkit"
+Documentation = "https://github.com/example/decorator-toolkit#readme"
