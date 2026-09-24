@@ -1,3 +1,10 @@
+Metadata-Version: 2.4
+Name: todo-cli
+Version: 1.0.0
+Summary: A simple command-line to-do list manager
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
@@ -12,5 +19,3 @@ python main.py add "Buy milk" --priority high --due 2026-09-10
 python main.py list --sort priority
 python main.py done 2
 python main.py remove 3
-
-todo add "Sell" --priority high --due 2026-09-10

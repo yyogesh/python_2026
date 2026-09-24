@@ -33,7 +33,7 @@ def show_menu():
     print("4. Mark task as done")
     print("5. Quit")
 
-def run():
+def main():
    tasks = load_tasks()
 
    parser = build_parser()
@@ -50,7 +50,7 @@ def run():
        save_tasks(tasks)
    elif args.command == 'complete':
        complete_task(tasks, args.index)
-       save_tasks(tasks, args.index)
+       save_tasks(tasks)
 
     # while True:
     #     show_menu()
@@ -93,4 +93,4 @@ def run():
 
 
 if __name__ == '__main__':
-    run()
+    main()
