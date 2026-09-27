@@ -1,21 +1,43 @@
 import argparse
 
+from todo.display import print_message, render_tasks
 from todo.storage import load_tasks, save_tasks
-from todo.tasks import add_task, complete_task, remove_task, list_tasks
+from todo.tasks import add_task, complete_task, get_sorted_tasks, remove_task, search_tasks
 
+def parse_tags(tags_string):
+    """Convert a comma-separated string like 'work,urgent' into ['work', 'urgent']."""
+    if not tags_string:
+        return []
+    return [tag.strip() for tag in tags_string.split(",")]
 
 def build_parser():
     parser = argparse.ArgumentParser(prog='todo', description='A simple command-line to-do list manager.')
 
     subparsers  = parser.add_subparsers(dest='command', required=True) # add/list/remove
 
-    add_parser= subparsers.add_parser('add', help='Add a new task.')
-    add_parser.add_argument('title', type=str, help='The title of the task.')
-    add_parser.add_argument('--priority', type=str, default='medium', choices=['high', 'medium', 'low'], help='The priority of the task.')
-    add_parser.add_argument('--due_date', type=str, default=None, help='Due date in YYYY-MM-DD format')
+     # --- add ---
+    add_parser = subparsers.add_parser("add", help="Add a new task")
+    add_parser.add_argument("title", help="Title of the task")
+    add_parser.add_argument(
+        "--priority", choices=["high", "medium", "low"], default="medium",
+        help="Task priority (default: medium)"
+    )
+    add_parser.add_argument("--due", dest="due_date", default=None, help="Due date YYYY-MM-DD")
+    add_parser.add_argument(
+        "--tags", default=None,
+        help="Comma-separated tags, e.g. --tags work,urgent"
+    )
 
-    list_parser = subparsers.add_parser('list', help='List tasks.')
-    list_parser.add_argument('--sort_by', type=str, default=None, choices=['priority', 'due_date'], help='Sort tasks by priority or due date.')
+     # --- list ---
+    list_parser = subparsers.add_parser("list", help="List all tasks")
+    list_parser.add_argument(
+        "--sort", dest="sort_by", choices=["priority", "due_date"], default=None
+    )
+
+    # --- search ---
+    search_parser = subparsers.add_parser("search", help="Search tasks by keyword (title or tags)")
+    search_parser.add_argument("keyword", help="Keyword to search for")
+
 
     remove_parser = subparsers.add_parser('remove', help='Remove a task.')
     remove_parser.add_argument('index', type=int, help='The index of the task to remove.')
@@ -25,13 +47,13 @@ def build_parser():
 
     return parser
 
-def show_menu():
-    print("Options:")
-    print("1. Add a task")
-    print("2. Remove a task")
-    print("3. List tasks")
-    print("4. Mark task as done")
-    print("5. Quit")
+# def show_menu():
+#     print("Options:")
+#     print("1. Add a task")
+#     print("2. Remove a task")
+#     print("3. List tasks")
+#     print("4. Mark task as done")
+#     print("5. Quit")
 
 def main():
    tasks = load_tasks()
@@ -41,16 +63,33 @@ def main():
    args = parser.parse_args()
 
    if args.command == 'add':
-       add_task(tasks, args.title, args.priority, args.due_date)
+       tags = parse_tags(args.tags)
+       add_task(tasks, args.title, args.priority, args.due_date, tags)
        save_tasks(tasks)
+       print_message(f"Added task: {args.title}")
+
    elif args.command == 'list':
-       list_tasks(tasks, args.sort_by)
+      # list_tasks(tasks, args.sort_by)
+      render_tasks(get_sorted_tasks(tasks, args.sort_by))
+
+   elif args.command == 'search':
+       render_tasks(search_tasks(tasks, args.keyword))
+
    elif args.command == 'remove':
-       remove_task(tasks, args.index)
-       save_tasks(tasks)
+       removed = remove_task(tasks, args.index)
+       if removed:
+            save_tasks(tasks)
+            print_message(f"Removed: {removed['title']}", style="red")
+       else:
+            print_message("Invalid index.", style="red")
+
    elif args.command == 'complete':
-       complete_task(tasks, args.index)
-       save_tasks(tasks)
+       completed = complete_task(tasks, args.index)
+       if completed:
+            save_tasks(tasks)
+            print_message(f"Marked as done: {completed['title']}")
+       else:
+            print_message("Invalid task number.", style="red")
 
     # while True:
     #     show_menu()

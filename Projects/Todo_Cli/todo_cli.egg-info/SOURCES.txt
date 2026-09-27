@@ -1,5 +1,7 @@
 README.md
 pyproject.toml
+tests/test_storage.py
+tests/test_tasks.py
 todo/__init__.py
 todo/cli.py
 todo/storage.py
@@ -8,4 +10,5 @@ todo_cli.egg-info/PKG-INFO
 todo_cli.egg-info/SOURCES.txt
 todo_cli.egg-info/dependency_links.txt
 todo_cli.egg-info/entry_points.txt
+todo_cli.egg-info/requires.txt
 todo_cli.egg-info/top_level.txt

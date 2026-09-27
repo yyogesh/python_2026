@@ -34,5 +34,12 @@
         "done": false,
         "priority": "high",
         "due_date": "2026-09-10"
+    },
+    {
+        "title": "Play Cricket",
+        "done": false,
+        "priority": "medium",
+        "due_date": null,
+        "tags": []
     }
 ]

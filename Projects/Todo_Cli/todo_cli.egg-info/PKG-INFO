@@ -4,6 +4,9 @@ Version: 1.0.0
 Summary: A simple command-line to-do list manager
 Requires-Python: >=3.8
 Description-Content-Type: text/markdown
+Requires-Dist: rich>=13.0
+Provides-Extra: test
+Requires-Dist: pytest>=7.0; extra == "test"
 
 ├── README.md
 ├── requirements.txt
@@ -19,3 +22,5 @@ python main.py add "Buy milk" --priority high --due 2026-09-10
 python main.py list --sort priority
 python main.py done 2
 python main.py remove 3
+
+todo add "Sell" --priority high --due 2026-09-10
